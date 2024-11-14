@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Node.js and dependencies...
+      - curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+      - yum install -y nodejs
+      - npm install # Installs dependencies
+
+  build:
+    commands:
+      - echo Building the React app...
+      - npm run build # Or 'yarn build' if using Yarn
+
+  post_build:
+    commands:
+      - echo Build completed. Preparing artifacts for deployment...
+
+artifacts:
+  files:
+    - '**/*'  # Includes all files in the build directory
+  base-directory: build  # React builds to the 'build' folder by default
+  discard-paths: yes  # Flattens directory structure in the artifact
+
